@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Analysis Results</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 30px;
+      color: #333;
+    }
+    h2, h3 {
+      color: #222;
+    }
+    video {
+      width: 720px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .section {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 30px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      max-width: 800px;
+    }
+    .chart {
+      margin-top: 20px;
+    }
+    img {
+      max-width: 100%;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.05);
+    }
+    .download-link {
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Tracked Match Video</h2>
+  <video controls autoplay>
+    <source src="{{ url_for('result_file', filename=video_file) }}" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <br>
+  <a class="download-link" href="{{ url_for('result_file', filename=video_file) }}" download>Download MP4</a>
+
+  <div class="section">
+    <h3>This notebook includes:</h3>
+    <ol>
+      <li>Health Analysis</li>
+      <li>Performance Analysis</li>
+      <li>Injury Prediction</li>
+      <li>Match Statistics</li>
+    </ol>
+  </div>
+
+  {% if charts %}
+    <div class="section">
+      <h3>Visual Insights</h3>
+      {% for chart in charts %}
+        <div class="chart">
+          <img src="{{ url_for('result_file', filename=chart) }}" alt="Analysis Chart">
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+</body>
+</html>
